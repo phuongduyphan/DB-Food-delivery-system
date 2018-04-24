@@ -1,0 +1,76 @@
+﻿							-- DELIVERY SYSTEM --
+
+- 3 view:
+	- main view: 
+		+ link:
+			* menus view
+			* foods view
+			* customers view
+			* orders view
+
+	- menus view:
+		+ view list of menus with their availabilities
+		+ create/delete menu
+		+ link:
+			* menu view ( click on a menu )
+
+	- menu view:
+		+ view list of dishes with their prices
+		+ add/remove food ( create dish from food )
+		+ edit menu properties
+			* availability
+			* discount modifier
+		+ edit price of each dish
+		+ link:
+			* food ( click on a dish to go to its corresponding food )
+	
+	- foods view:
+		+ view list of foods
+		+ create/delete food
+		+ link:
+			* food ( click on a food )
+
+	- food view:
+		+ view list of its materials
+		+ add/remove materials
+		+ edit food properties
+			* base price
+	
+	- customers view:
+		+ view list of customers
+		+ create/delete customers
+		+ link:
+			* customer ( click on a customer )
+
+	- customer view
+		+ view list of customer's orders
+		+ edit customer properties
+		+ create order from customer ( create new order then go to order view )
+		+ link:
+			* order ( click on an order or create new order )
+
+
+	- orders view
+		+ view list of orders with their stages ( ordered by stage )
+		+ remove order
+		+ add order ( move to customers view )
+		+ link:
+			* order ( click on an order )
+			* customers ( create new order )
+
+	- order view
+		+ view list of dishes and their prices
+		+ view total bill
+		+ edit order properties:
+			* stage
+
+	- materials view:
+		+ view list of materials
+		+ create/delete materials
+		+ edit material properties:
+			* unit price
+		+ add materials to a list of shopping list with an amount to calculate the total bill
+
+
+(all the edit features have the save button
+		 				(^-^)	(OvO)b	~O.o~	>.<

@@ -1,20 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-/**
- * TODO:
- * get DISH by MENU_ID
- * get FOOD by DISH_ID
- *
- * get MATERIAL by FOOD_ID
- *
- * get ORDER by DISH_ID
- * get DISH by ORDER_ID
- *
- * get CUSTOMER by ORDER_ID
- * get ORDER by CUSTOMER_ID
- */
-
 public class Database {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -27,24 +13,14 @@ public class Database {
     private static final String DATABASE_URL = "jdbc:mysql://" + server
                                                + ":" + port + "/" + database;
 
-    private Database instance;
-    private Connection connection;
-    private Statement statement;
-
-    public Database getInstance() {
-        if (instance == null) instance = new Database();
-        return instance;
-    }
+    private static Database instance;
+    private static Connection connection;
+    private static Statement statement;
 
     private Database() {
         try {
-            // load database driver class
             Class.forName(JDBC_DRIVER);
-            System.out.println("# - Driver loaded!");
-
-            // establish connection to database
             connection = DriverManager.getConnection(DATABASE_URL, user, pass);
-            System.out.println("# - Connection obtained!");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -52,10 +28,15 @@ public class Database {
         }
     }
 
+    public static Database getInstance() {
+        if (instance == null) instance = new Database();
+        return instance;
+    }
+
     /**
      * Remember to close the returned stmt and rs
      */
-    private ArrayList<ArrayList> query(String sql) {
+    private ArrayList<ArrayList> query(String sql, String resultType) {
         Statement stmt = null;
         ResultSet rs = null;
         ArrayList rows = null;
@@ -63,7 +44,7 @@ public class Database {
         try {
             stmt = connection.createStatement();
             rs = stmt.executeQuery(sql);
-            rows = resultSetToArrayList(rs
+            rows = resultSetToArrayList(rs, resultType);
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -78,118 +59,159 @@ public class Database {
                 stmt = null;
             }
         }
-        return rs;
-    }
-
-    private ArrayList<ArrayList> resultSetToArrayList(ResultSet rs, String table) throws SQLException {
-        int tableId;
-        table = table.toLowerCase();
-        if (table == "menu") tableId = 0;
-        else if (table == "dish") tableId = 1;
-        else if (table == "food") tableId = 2;
-        else if (table == "needs") tableId = 3;
-        else if (table == "contains") tableId = 4;
-        else if (table == "order") tableId = 5;
-        else if (table == "material") tableId = 6;
-        else if (table == "stages") tableId = 7;
-        else if (table == "customer") tableId = 8;
-        else throw new Error("table not found");
-        ArrayList<ArrayList> rows = new ArrayList<ArrayList>();
-        switch (tableId) {
-        case 0:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<String>());
-            break;
-        case 1:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 2:
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 3:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 4:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 5:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 6:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<String>());
-            rows.add(new ArrayList<Integer>());
-            break;
-        case 7:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<String>());
-            break;
-        case 8:
-            rows.add(new ArrayList<Integer>());
-            rows.add(new ArrayList<String>());
-            rows.add(new ArrayList<String>());
-            rows.add(new ArrayList<String>());
-            break;
-        default:
-            throw new Error("table not found");
-        }
-        rs.beforeFirst();
-        while (rs.next()) {
-            switch (tableId) {
-            case 0:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getString(2));
-                break;
-            case 1:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getInt(2));
-                rows.get(2).add(rs.getInt(3));
-                rows.get(3).add(rs.getInt(4));
-                break;
-            case 2:
-                rows.get(0).add(rs.getInt(1));
-                break;
-            case 3:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getInt(2));
-                rows.get(2).add(rs.getInt(3));
-                break;
-            case 4:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getInt(2));
-                break;
-            case 5:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getInt(2));
-                rows.get(2).add(rs.getInt(3));
-                break;
-            case 6:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getString(2));
-                rows.get(2).add(rs.getInt(3));
-                break;
-            case 7:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getString(2));
-                break;
-            case 8:
-                rows.get(0).add(rs.getInt(1));
-                rows.get(1).add(rs.getString(2));
-                rows.get(2).add(rs.getString(3));
-                rows.get(3).add(rs.getString(4));
-                break;
-            default:
-                throw new Error("table not found");
-            }
-        }
         return rows;
     }
+
+    private ArrayList<ArrayList> resultSetToArrayList(ResultSet rs, String resultType) throws SQLException {
+        resultType = resultType.toLowerCase();
+        if (resultType.equals("menu")) return menuToArrayList(rs);
+        else if (resultType.equals("dish")) return dishToArrayList(rs);
+        else if (resultType.equals("food")) return foodToArrayList(rs);
+        else if (resultType.equals("order")) return orderToArrayList(rs);
+        else if (resultType.equals("material")) return materialToArrayList(rs);
+        else if (resultType.equals("customer")) return customerToArrayList(rs);
+        else throw new Error("result not found");
+}
+
+    /**
+     * MENU RELATED METHODS
+     */
+    public ArrayList getMenus() {
+
+    }
+
+    public Menu createMenu(Menu menu) {
+
+    }
+
+    public boolean deleteMenu(Menu menu) {
+
+    }
+
+    public boolean updateMenu(Menu menu) {
+
+    }
+
+    public boolean addDishToMenu(Menu menu, Dish dish) {
+
+    }
+
+    public boolean removeDishFromMenu(Menu menu, Dish dish) {
+
+    }
+
+    /**
+     * DISH RELATED METHODS
+     */
+    public ArrayList getDishes(Menu menu) {
+    }
+
+    public ArrayList getDishes(Order order) {
+
+    }
+
+    public Dish createDish(Dish dish) {
+
+    }
+
+    public boolean deleteDish(Dish dish) {
+
+    }
+
+    public boolean updateDish(Dish dish) {
+
+    }
+
+
+    /**
+     * FOOD RELATED METHODS
+     */
+    public ArrayList getFoods() {
+    }
+
+    public ArrayList getFoods(Material material) {
+    }
+
+    public Food createFood(Food food) {
+
+    }
+
+    public boolean deleteFood(Food food) {
+
+    }
+
+    public boolean updateFood(Food food) {
+
+    }
+
+    /**
+     * ORDER RELATED METHODS
+     */
+    public ArrayList getOrders(Customer customer) {
+    }
+
+    public ArrayList getOrders() {
+    }
+
+    public Order createOrder(Order order) {
+
+    }
+
+    public boolean addDishToOrder(Order order, Dish dish) {
+
+    }
+
+    public boolean removeDishFromOrder(Order order, Dish dish) {
+
+    }
+
+    public boolean deleteOrder(Order order) {
+
+    }
+
+    public boolean updateOrder(Order order) {
+
+    }
+
+    /**
+     * MATERIAL RELATED METHODS
+     */
+    public ArrayList getMaterials() {
+
+    }
+
+    public ArrayList getMaterials(Food food) {
+    }
+
+    public Material createMaterial(Material material) {
+
+    }
+
+    public boolean deleteMaterial(Material material) {
+
+    }
+
+    public boolean updateMaterial(Material material) {
+
+    }
+
+    /**
+     * CUSTOMER RELATED METHODS
+     */
+    public ArrayList getCustomers() {
+
+    }
+
+    public Customer createCustomer(Customer customer) {
+
+    }
+
+    public boolean deleteCustomer(Customer customer) {
+
+    }
+
+    public boolean updateCustomer(Customer customer) {
+
+    }
+
 }

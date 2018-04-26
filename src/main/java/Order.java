@@ -3,10 +3,16 @@ import java.util.ArrayList;
 public class Order {
     private Integer id;
     private Customer customer;
+    String stage;
 
-    public Order(Integer id, Customer customer, ArrayList<Dish> dishes) {
+    public Order(Integer id, Customer customer) {
+        this(id, customer, "Received");
+    }
+
+    public Order(Integer id, Customer customer, String stage) {
         this.id = id;
         this.customer = customer;
+        this.stage = stage;
     }
 
     public static Order create(Order order){

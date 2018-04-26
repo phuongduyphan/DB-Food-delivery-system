@@ -5,7 +5,7 @@ public class Menu {
     private String name;
     private Boolean availability;
 
-    public Menu(Integer id, String name, ArrayList<Dish> dishes, Boolean availability) {
+    public Menu(Integer id, String name, Boolean availability) {
         this.id = id;
         this.name = name;
         this.availability = availability;

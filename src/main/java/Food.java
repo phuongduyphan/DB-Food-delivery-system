@@ -8,7 +8,7 @@ public class Food {
         this.name = name;
     }
 
-    public static Food create(Food food){
+    public static boolean create(Food food){
         return Database.getInstance().createFood(food);
     }
 

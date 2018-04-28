@@ -12,7 +12,7 @@ public class Material {
 
     }
 
-    public static Material create(Material material){
+    public static boolean create(Material material){
         return Database.getInstance().createMaterial(material);
     }
 

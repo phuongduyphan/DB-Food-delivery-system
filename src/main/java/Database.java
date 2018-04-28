@@ -15,15 +15,12 @@ public class Database {
 
     private static Database instance;
     private static Connection connection;
-    private static Statement statement;
 
     private Database() {
         try {
             Class.forName(JDBC_DRIVER);
             connection = DriverManager.getConnection(DATABASE_URL, user, pass);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (SQLException|ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -58,8 +55,7 @@ public class Database {
                 stmt = null;
             }
         }
-        if (affectedRow > 0) return true;
-        return false;
+        return (affectedRow > 0);
     }
 
     private ArrayList query(String sql, String resultType) {
@@ -96,6 +92,7 @@ public class Database {
         else if (resultType.equals("order")) return orderToArrayList(rs);
         else if (resultType.equals("material")) return materialToArrayList(rs);
         else if (resultType.equals("customer")) return customerToArrayList(rs);
+        else if (resultType.equals("stage")) return stageToArrayList(rs);
         else throw new Error("result not found");
     }
 
@@ -114,8 +111,7 @@ public class Database {
         rs.beforeFirst();
         ArrayList<Dish> dishes = new ArrayList<>();
         while (rs.next()) {
-            dishes.add(new Dish(rs.getInt("Dish.ID"),
-                                getMenu(rs.getInt("Dish.MenuID")),
+            dishes.add(new Dish(getMenu(rs.getInt("Dish.MenuID")),
                                 getFood(rs.getInt("Dish.FoodID")),
                                 rs.getFloat("Dish.Price")));
         }
@@ -138,7 +134,7 @@ public class Database {
         while (rs.next()) {
             orders.add(new Order(rs.getInt("Order.ID"),
                                  getCustomer(rs.getInt("Order.CustomerID")),
-                                 getStage(rs.getInt("Order.StageID"))));
+                                 Stage.stages.get(rs.getString("Order.StageStr"))));
         }
         return orders;
     }
@@ -166,6 +162,15 @@ public class Database {
         return customers;
     }
 
+    private ArrayList<String> stageToArrayList(ResultSet rs) throws SQLException {
+        rs.beforeFirst();
+        ArrayList<String> strings = new ArrayList<>();
+        while (rs.next()) {
+            strings.add(rs.getString("Stage.StageStr"));
+        }
+        return strings;
+    }
+
     /**
      * MENU RELATED METHODS
      */
@@ -186,19 +191,17 @@ public class Database {
     }
 
     public boolean deleteMenu(Menu menu) {
-        return update("DELETE FROM `food_delivery`.`menu` WHERE `ID`='" + menu.getId() + "';")
+        return update("DELETE FROM `food_delivery`.`menu` WHERE `ID`='" + menu.getId() + "';");
     }
 
     public boolean updateMenu(Menu menu) {
-        return update("UPDATE `food_delivery`.`menu` SET `MenuStr`='" + menu.getName() + "' WHERE `ID`='2';")
+        return update("UPDATE `food_delivery`.`menu` SET `MenuStr`='" + menu.getName() +
+                      "' WHERE `ID`='" + menu.getId() + "';");
     }
 
     public boolean addDishToMenu(Menu menu, Dish dish) {
-
-    }
-
-    public boolean removeDishFromMenu(Menu menu, Dish dish) {
-
+        return update("INSERT INTO Dish (MenuID, FoodID, Price) " +
+                      "VALUES (" + menu.getId() + "," + dish.getFood().getId() + "," + dish.getPrice() + ")");
     }
 
     /**
@@ -210,21 +213,25 @@ public class Database {
     }
 
     public ArrayList getDishes(Order order) {
-        return query("SELECT * FROM DISH,contains" +
+        return query("SELECT * FROM DISH,contains " +
                      "WHERE contains.OrderID = " + order.getId(),
                      "dish");
     }
 
-    public Dish createDish(Dish dish) {
-
+    public boolean createDish(Dish dish) {
+        return update("INSERT INTO Dish (MenuID, FoodID, Price) " +
+                      "VALUES (" + dish.getMenu().getId() + "," + dish.getFood().getId() + "," + dish.getPrice() + ")");
     }
 
     public boolean deleteDish(Dish dish) {
-
+        return update("DELETE FROM Dish " +
+                      "WHERE ID = " + dish.getID());
     }
 
     public boolean updateDish(Dish dish) {
-
+        return update("UPDATE Dish SET `Price`='" + dish.getPrice() + "' " +
+                      ", `MenuID`='" + dish.getMenu().getId() + "' ,FoodID = " + dish.getFood().getId() + " " +
+                      "WHERE ID = " + dish.getID());
     }
 
 
@@ -234,7 +241,7 @@ public class Database {
     public ArrayList getFoods() {
         return query("SELECT * FROM FOOD",
                      "food");
-    }5
+    }
 
     public ArrayList getFoods(Material material) {
         return query("SELECT * FROM Food, needs " +
@@ -249,23 +256,26 @@ public class Database {
         return a.get(0);
     }
 
-    public Food createFood(Food food) {
-
+    public boolean createFood(Food food) {
+        return update("INSERT INTO Food (FoodStr) " +
+                      "VALUES (" + food.getName() + ")");
     }
 
     public boolean deleteFood(Food food) {
-
+        return update("DELETE FROM Dish " +
+                      "WHERE ID = " + food.getId());
     }
 
     public boolean updateFood(Food food) {
-
+        return update("UPDATE Dish SET `FoodStr`='" + food.getName() + "' " +
+                      "WHERE `ID`='" + food.getId());
     }
 
     /**
      * ORDER RELATED METHODS
      */
     public ArrayList getOrders(Customer customer) {
-        return query("SELECT * FROM Order" +
+        return query("SELECT * FROM Order " +
                      "WHERE CustomerID = " + customer.getId(),
                      "order");
     }
@@ -275,76 +285,102 @@ public class Database {
                      "order");
     }
 
-    public Order createOrder(Order order) {
-
+    public Boolean createOrder(Order order) {
+        return update("INSERT INTO Food (CustomerID,StageStr) " +
+                      "VALUES (" + order.getCustomer().getId() + "," + order.getStage().getStageStr() + ")");
     }
 
     public boolean addDishToOrder(Order order, Dish dish) {
-
+        return update("INSERT INTO contains (OrderID, DishID) " +
+                      "VALUES (" + order.getId() + "," + dish.getID());
     }
 
     public boolean removeDishFromOrder(Order order, Dish dish) {
-
+        return update("DELETE FROM contains WHERE " +
+                      "OrderID = " + order.getId() + " " +
+                      "DishID = " + dish.getID());
     }
 
     public boolean deleteOrder(Order order) {
-
+        return update("DELETE FROM Order WHERE ID = " + order.getId());
     }
 
     public boolean updateOrder(Order order) {
-
+        return update("UPDATE Dish SET `CustomerID`='" + order.getCustomer().getId() + "' ," +
+                      "StageStr = " + order.getStage().getStageStr() + " " +
+                      "WHERE `ID`='" + order.getId());
     }
 
     /**
      * MATERIAL RELATED METHODS
      */
     public ArrayList getMaterials() {
-
+        return query("SELECT * FROM Material",
+                     "material");
     }
 
     public ArrayList getMaterials(Food food) {
+        return query("SELECT * FROM Material, needs " +
+                     "WHERE needs.FoodID = " + food.getId(),
+                     "food");
     }
 
-    public Material createMaterial(Material material) {
-
+    public boolean createMaterial(Material material) {
+        return update("INSERT INTO Material (MaterialStr, UnitPrice) " +
+                      "VALUES (" + material.getName() + "," + material.getUnitPrice());
     }
 
     public boolean deleteMaterial(Material material) {
-
+        return update("DELETE FROM Material " +
+                      "WHERE ID = " + material.getId());
     }
 
     public boolean updateMaterial(Material material) {
-
+        return update("UPDATE Material SET " +
+                      "MaterialStr = " + material.getName() + "," +
+                      "UnitPrice = " + material.getUnitPrice() + " " +
+                      "WHERE ID = " + material.getId());
     }
 
     /**
      * CUSTOMER RELATED METHODS
      */
     public ArrayList getCustomers() {
-
+        return query("SELECT * FROM Customer",
+                     "customer");
     }
 
     public Customer getCustomer(Integer id) {
-
+        ArrayList<Customer> customers = query("SELECT * FROM Customer" +
+                                   "WHERE Customer.ID = " + id,
+                                   "customer");
+        assert(customers.size() == 1);
+        return customers.get(0);
     }
 
-    public Customer createCustomer(Customer customer) {
-
+    public boolean createCustomer(Customer customer) {
+        return update("INSERT INTO Customer (Name,Tel,Address) " +
+                      "VALUES (" + customer.getName() + "," + customer.getTel() + "," + customer.getAddress() + ")");
     }
 
     public boolean deleteCustomer(Customer customer) {
-
+        return update("DELETE FROM Customer " +
+                      "WHERE ID = " + customer.getId());
     }
 
     public boolean updateCustomer(Customer customer) {
-
+        return update("UPDATE Material SET " +
+                      "Name = " + customer.getName() + "," +
+                      "Tel = " + customer.getTel() + "," +
+                      "Address = " + customer.getAddress() + " " +
+                      "WHERE ID = " + customer.getId());
     }
 
     /**
      * STAGE RELATED METHODS
      */
-    public String getStage(Integer id) {
-
+    public ArrayList<String> getStages() {
+        return query("SELECT * FROM Stage ", "stage");
     }
 
 }

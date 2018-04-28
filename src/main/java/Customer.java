@@ -13,7 +13,7 @@ public class Customer  {
         this.address = address;
     }
 
-    public static Customer create(Customer customer) {
+    public static boolean create(Customer customer) {
         return Database.getInstance().createCustomer(customer);
     }
 

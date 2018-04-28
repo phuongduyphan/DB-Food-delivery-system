@@ -11,7 +11,7 @@ public class Menu {
         this.availability = availability;
     }
 
-    public static Menu create(Menu menu){
+    public static boolean create(Menu menu){
         return Database.getInstance().createMenu(menu);
     }
 
@@ -32,7 +32,7 @@ public class Menu {
     }
 
     public boolean removeDish(Dish dish) {
-        return Database.getInstance().removeDishFromMenu(this, dish);
+        return Database.getInstance().deleteDish(dish);
     }
 
     public ArrayList getDishes() {

@@ -1,21 +1,25 @@
+
 import java.util.ArrayList;
 
 public class Order {
     private Integer id;
     private Customer customer;
-    String stage;
+    private String stageStr;
+    private Stage stage=new Stage();
 
     public Order(Integer id, Customer customer) {
-        this(id, customer, "Received");
+        this(id, customer, new Stage());
     }
 
-    public Order(Integer id, Customer customer, String stage) {
+    public Order(Integer id, Customer customer, Stage stage) {	
         this.id = id;
+
         this.customer = customer;
         this.stage = stage;
+        stageStr=stage.getStageStr();
     }
 
-    public static Order create(Order order){
+    public static Boolean create(Order order) {
         return Database.getInstance().createOrder(order);
     }
 
@@ -23,11 +27,12 @@ public class Order {
         return Database.getInstance().getOrders();
     }
 
-    public static boolean delete(Order order){
-        return Database.getInstance().deleteOrder(order);
+
+    public Stage getStage() {
+        return stage;
     }
 
-    public boolean save(){
+    public boolean save() {
         return Database.getInstance().updateOrder(this);
     }
 
@@ -35,7 +40,7 @@ public class Order {
         return new Float(0.0);
     }
 
-    public boolean addDish(Dish dish){
+    public boolean addDish(Dish dish) {
         return Database.getInstance().addDishToOrder(this, dish);
     }
 

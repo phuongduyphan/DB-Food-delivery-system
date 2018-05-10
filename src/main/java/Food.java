@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Food {
@@ -8,7 +9,7 @@ public class Food {
         this.name = name;
     }
 
-    public static Food create(Food food){
+    public static boolean create(Food food){
         return Database.getInstance().createFood(food);
     }
 
@@ -39,5 +40,9 @@ public class Food {
 
     public Integer getId() {
         return id;
+    }
+    @Override
+    public String toString() {
+    	return this.id +" name: " +   this.name;
     }
 }

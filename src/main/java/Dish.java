@@ -1,17 +1,20 @@
+
 public class Dish {
-    private Integer id;
+    private Integer ID;
     private Menu menu;
     private Food food;
     private Float price;
 
-    public Dish(Integer id, Menu menu, Food food, Float price) {
-        this.id = id;
+   
+    public Dish(Integer ID, Menu menu, Food food, Float price) {
+
+        this.ID = ID;
         this.menu = menu;
         this.food = food;
         this.price = price;
     }
 
-    public static Dish create(Dish dish){
+    public static boolean create(Dish dish){
         return Database.getInstance().createDish(dish);
     }
 
@@ -19,12 +22,12 @@ public class Dish {
         return Database.getInstance().deleteDish(dish);
     }
 
-    public boolean save(){
-        return Database.getInstance().updateDish(this);
+    public Integer getID() {
+        return ID;
     }
 
-    public Integer getId() {
-        return id;
+    public boolean save(){
+        return Database.getInstance().updateDish(this);
     }
 
     public Menu getMenu() {

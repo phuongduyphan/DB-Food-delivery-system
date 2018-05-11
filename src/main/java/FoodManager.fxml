@@ -27,9 +27,9 @@
           <TableColumn fx:id="nameCol" prefWidth="389.0" text="NAME" />
         </columns>
       </TableView>
-      <Button fx:id="load" layoutX="517.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="load" layoutX="492.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
       <Button fx:id="newFood" layoutX="87.0" layoutY="111.0" mnemonicParsing="false" onAction="#newFood" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="New Food" textFill="#d7c012" />
-      <TextField fx:id="newfoodTextField" layoutX="87.0" layoutY="163.0" onAction="#newFood" promptText="Insert New Food Here" style="-fx-background-color: #3d4956;">
+      <TextField fx:id="newfoodTextField" layoutX="85.0" layoutY="163.0" onAction="#newFood" promptText="Insert New Food Here" style="-fx-background-color: #3d4956;">
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>

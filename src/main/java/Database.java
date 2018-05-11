@@ -288,6 +288,7 @@ public class Database {
                      "orderattribute");
     }
 
+
     public Boolean createOrder(OrderAttribute order) {
         return update("INSERT INTO `Order` (CustomerID,StageStr) " +
                       "VALUES (" + order.getCustomerID() + ",'" + order.getStage() + "')");

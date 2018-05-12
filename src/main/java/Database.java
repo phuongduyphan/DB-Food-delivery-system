@@ -259,8 +259,6 @@ public class Database {
 		return a.get(0);
 	}
 
-	// "INSERT INTO `food_delivery`.`menu` (`MenuStr`) VALUES ('" + menu.getName() +
-	// "')");
 	public boolean createFood(Food food) {
 		return update("INSERT INTO `food_delivery`.`food` (`FoodStr`) " + "VALUES ('" + food.getName() + "')");
 	}

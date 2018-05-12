@@ -19,12 +19,6 @@
             </Text>
          </children>
       </AnchorPane>
-      <TableView fx:id="tableUser" layoutX="85.0" layoutY="190.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
-         <columns>
-            <TableColumn fx:id="idCol" onEditCommit="#changeIdMenu" prefWidth="161.0" text="ID" />
-            <TableColumn fx:id="nameCol" onEditCommit="#changeMenuName" prefWidth="389.0" text="NAME" />
-         </columns>
-      </TableView>
       <Button fx:id="back" layoutX="316.0" layoutY="675.0" mnemonicParsing="false" onAction="#backButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Back" textFill="#d7c012" />
       <Text fill="#e81212" layoutX="503.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database project - IMF team" wrappingWidth="202.6708984375" />
       <Button fx:id="newMenu" layoutX="85.0" layoutY="114.0" mnemonicParsing="false" onAction="#newMenu" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="New Menu" textFill="#d7c012" />
@@ -46,5 +40,12 @@
       <Button fx:id="view" layoutX="509.0" layoutY="114.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="View" textFill="#d7c012" />
       <Button fx:id="Delete" layoutX="509.0" layoutY="153.0" mnemonicParsing="false" onAction="#deleteMenuButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
       <Button fx:id="view1" layoutX="305.0" layoutY="114.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <TableView fx:id="tableUser" layoutX="86.0" layoutY="192.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
+         <columns>
+            <TableColumn fx:id="idCol" onEditCommit="#changeIdMenu" prefWidth="88.0" text="ID" />
+            <TableColumn fx:id="nameCol" onEditCommit="#changeMenuName" prefWidth="331.0" text="NAME ID" />
+            <TableColumn fx:id="availability" minWidth="7.0" onEditCommit="#availabilityButton" prefWidth="131.0" text="Availability" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

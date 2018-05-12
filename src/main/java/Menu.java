@@ -58,4 +58,9 @@ public class Menu {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+
+	public void setID(int id) {
+		
+		this.id = id;
+	}
 }

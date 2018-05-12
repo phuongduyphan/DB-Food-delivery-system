@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FoodManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+ fx:controller="FoodManagerController">
    <children>
       <AnchorPane prefHeight="103.0" prefWidth="720.0" style="-fx-background-color: #3d4956;">
          <children>
@@ -23,11 +24,11 @@
       <Button fx:id="back" layoutX="327.0" layoutY="681.0" mnemonicParsing="false" onAction="#backButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Back" textFill="#d7c012" />
       <TableView fx:id="tableUser" layoutX="85.0" layoutY="204.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
         <columns>
-          <TableColumn fx:id="idCol" prefWidth="161.0" text="ID" />
-          <TableColumn fx:id="nameCol" prefWidth="389.0" text="NAME" />
+          <TableColumn fx:id="idCol" onEditCommit="#changeIdFood" prefWidth="161.0" text="ID" />
+          <TableColumn fx:id="nameCol" onEditCommit="#changeFoodName" prefWidth="389.0" text="NAME" />
         </columns>
       </TableView>
-      <Button fx:id="load" layoutX="492.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="load" layoutX="372.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
       <Button fx:id="newFood" layoutX="87.0" layoutY="111.0" mnemonicParsing="false" onAction="#newFood" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="New Food" textFill="#d7c012" />
       <TextField fx:id="newfoodTextField" layoutX="85.0" layoutY="163.0" onAction="#newFood" promptText="Insert New Food Here" style="-fx-background-color: #3d4956;">
          <cursor>
@@ -44,6 +45,7 @@
             </Lighting>
          </effect>
       </TextField>
-      <Button fx:id="Delete" layoutX="304.0" layoutY="111.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
+      <Button fx:id="Delete" layoutX="242.0" layoutY="111.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
+      <Button fx:id="viewFood" layoutX="506.0" layoutY="111.0" mnemonicParsing="true" onAction="#viewFoodButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="View" textFill="#d7c012" />
    </children>
 </AnchorPane>

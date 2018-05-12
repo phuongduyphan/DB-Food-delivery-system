@@ -45,4 +45,9 @@ public class Food {
     public String toString() {
     	return this.id +" name: " +   this.name;
     }
+
+	public void setID(Integer id) {
+		this.id = id;
+		
+	}
 }

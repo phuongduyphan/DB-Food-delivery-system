@@ -45,16 +45,18 @@ public class OrderView extends Application {
     GridPane dishSet = new GridPane();
     int menuPage=1;
     int dishPage=1;
+    Text totalLabel= new Text("Total");
+    TextField total = new TextField();
+    GridPane totalCost= new GridPane();
     ArrayList<Dish> dishes=new ArrayList<Dish>();
+    Float cost=0f;
     
 		public OrderView(Customer customer)
 		{
 			this.customer=customer;
 		}
     
-   public static void main(String args[]){
-      launch(args);
-   }
+ 
 	
 		@Override
    public void start(Stage stage) {
@@ -67,6 +69,7 @@ public class OrderView extends Application {
     	  menuButton.add(menuList.get(i).getName());
       }
       System.out.println(menuButton.size());
+      
 		if(menuButton.size()<=6)
 		{
 			backMenu.setDisable(true);
@@ -192,6 +195,17 @@ public class OrderView extends Application {
 		table.setEditable(true);
 		//---------------------------
 
+		
+		//total-------------------
+		totalCost.setVgap(5);
+	    totalCost.setHgap(5);
+	    totalCost.setAlignment(Pos.CENTER);
+	    totalCost.add(totalLabel, 0,0);
+	    totalCost.add(total, 0, 1);
+	    total.setText(String.valueOf(cost));
+	    total.setEditable(false);
+		
+		//----------------
 
 
 
@@ -215,6 +229,7 @@ public class OrderView extends Application {
       gridPane.add(buttonSet, 2, 1);
       gridPane.add(dishSet, 1, 2,2,2);
       gridPane.add(confirm, 0, 2);
+      gridPane.add(totalCost, 0, 1);
       //Setting the back ground color
       gridPane.setStyle("-fx-background-color: BEIGE;");
 
@@ -271,7 +286,8 @@ public class OrderView extends Application {
 				data =FXCollections.observableArrayList(list);
           	  System.out.println(data.size());
 				table.setItems(data);
-
+				cost+=dish.getPrice()*quantity;
+				total.setText(String.valueOf(cost));
 
 
               }

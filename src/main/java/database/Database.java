@@ -1,3 +1,4 @@
+package database;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class Database {
 	private static final String server = "localhost"; // Server name
 	private static final int port = 3306; // TCP Port
 	private static final String user = "root";
-	private static final String pass = "thanhtung1";
+	private static final String pass = "root";
 	private static final String database = "food_delivery";
 	private static final String DATABASE_URL = "jdbc:mysql://" + server + ":" + port + "/" + database
 			+ "?autoReconnect=true&useSSL=false";
@@ -98,25 +99,17 @@ public class Database {
 		return rows;
 	}
 
-	private ArrayList resultSetToArrayList(ResultSet rs, String resultType) throws SQLException {
-		resultType = resultType.toLowerCase();
-		if (resultType.equals("menu"))
-			return menuToArrayList(rs);
-		else if (resultType.equals("dish"))
-			return dishToArrayList(rs);
-		else if (resultType.equals("food"))
-			return foodToArrayList(rs);
-		else if (resultType.equals("orderattribute"))
-			return orderToArrayList(rs);
-		else if (resultType.equals("material"))
-			return materialToArrayList(rs);
-		else if (resultType.equals("customer"))
-			return customerToArrayList(rs);
-		else if (resultType.equals("stage"))
-			return stageToArrayList(rs);
-		else
-			throw new Error("result not found");
-	}
+    private ArrayList resultSetToArrayList(ResultSet rs, String resultType) throws SQLException {
+        resultType = resultType.toLowerCase();
+        if (resultType.equals("menu")) return menuToArrayList(rs);
+        else if (resultType.equals("dish")) return dishToArrayList(rs);
+        else if (resultType.equals("food")) return foodToArrayList(rs);
+        else if (resultType.equals("orderattribute")) return orderToArrayList(rs);
+        else if (resultType.equals("material")) return materialToArrayList(rs);
+        else if (resultType.equals("customer")) return customerToArrayList(rs);
+        else if (resultType.equals("stage")) return stageToArrayList(rs);
+        else throw new Error("result not found");
+    }
 
 	private ArrayList<Menu> menuToArrayList(ResultSet rs) throws SQLException {
 		rs.beforeFirst();
@@ -127,15 +120,17 @@ public class Database {
 		return menus;
 	}
 
-	private ArrayList<Dish> dishToArrayList(ResultSet rs) throws SQLException {
-		rs.beforeFirst();
-		ArrayList<Dish> dishes = new ArrayList<>();
-		while (rs.next()) {
-			dishes.add(new Dish(rs.getInt("Dish.ID"), getMenu(rs.getInt("Dish.MenuID")),
-					getFood(rs.getInt("Dish.FoodID")), rs.getFloat("Dish.Price")));
-		}
-		return dishes;
-	}
+    private ArrayList<Dish> dishToArrayList(ResultSet rs) throws SQLException {
+        rs.beforeFirst();
+        ArrayList<Dish> dishes = new ArrayList<>();
+        while (rs.next()) {
+            dishes.add(new Dish(rs.getInt("Dish.ID"),
+            					getMenu(rs.getInt("Dish.MenuID")),
+                                getFood(rs.getInt("Dish.FoodID")),
+                                rs.getFloat("Dish.Price")));
+        }
+        return dishes;
+    }
 
 	private ArrayList<Food> foodToArrayList(ResultSet rs) throws SQLException {
 		rs.beforeFirst();
@@ -147,15 +142,16 @@ public class Database {
 		return foods;
 	}
 
-	private ArrayList<OrderAttribute> orderToArrayList(ResultSet rs) throws SQLException {
-		rs.beforeFirst();
-		ArrayList<OrderAttribute> orders = new ArrayList<>();
-		while (rs.next()) {
-			orders.add(new OrderAttribute(rs.getInt("Order.ID"), rs.getInt("Order.CustomerID"),
-					rs.getString("Order.stageStr")));
-		}
-		return orders;
-	}
+    private ArrayList<OrderAttribute> orderToArrayList(ResultSet rs) throws SQLException {
+        rs.beforeFirst();
+        ArrayList<OrderAttribute> orders = new ArrayList<>();
+        while (rs.next()) {
+            orders.add(new OrderAttribute(rs.getInt("Order.ID"),
+                                 rs.getInt("Order.CustomerID"),
+                                 rs.getString("Order.stageStr")));
+        }
+        return orders;
+    }
 
 	private ArrayList<Material> materialToArrayList(ResultSet rs) throws SQLException {
 		rs.beforeFirst();
@@ -217,16 +213,19 @@ public class Database {
 				+ dish.getFood().getId() + "," + dish.getPrice() + ")");
 	}
 
-	/**
-	 * DISH RELATED METHODS
-	 */
-	public ArrayList getDishes(Menu menu) {
-		return query("SELECT * FROM DISH WHERE MenuID = " + menu.getId(), "dish");
-	}
+    /**
+     * DISH RELATED METHODS
+     */
+    public ArrayList getDishes(Menu menu) {
+        return query("SELECT * FROM DISH WHERE MenuID = " + menu.getId(),
+                     "dish");
+    }
 
-	public ArrayList getDishes(OrderAttribute order) {
-		return query("SELECT * FROM DISH,contains " + "WHERE contains.OrderID = " + order.getId(), "dish");
-	}
+    public ArrayList getDishes(OrderAttribute order) {
+        return query("SELECT * FROM DISH,contains " +
+                     "WHERE contains.OrderID = " + order.getId(),
+                     "dish");
+    }
 
 	public boolean createDish(Dish dish) {
 		return update("INSERT INTO Dish (MenuID, FoodID, Price) " + "VALUES (" + dish.getMenu().getId() + ","
@@ -263,6 +262,11 @@ public class Database {
 		return update("INSERT INTO `food_delivery`.`food` (`FoodStr`) " + "VALUES ('" + food.getName() + "')");
 	}
 
+    public boolean addMaterialToFood(Food food, Material material, Integer amount) {
+        return update("INSERT INTO `food_delivery`.`needs` (`FoodID`, `MaterialID`, `MaterialAmount`) " +
+                      "VALUES ('"+food.getId()+"', '"+material.getId()+"', '"+amount+"');");
+    }
+
 	public boolean deleteFood(Food food) {
 		return update("DELETE FROM FOOD " + "WHERE ID = " + food.getId());
 	}
@@ -271,46 +275,53 @@ public class Database {
 		return update("UPDATE Dish SET `FoodStr`='" + food.getName() + "' " + "WHERE `ID`='" + food.getId());
 	}
 
-	/**
-	 * ORDER RELATED METHODS
-	 */
-	public ArrayList getOrders(Customer customer) {
-		return query("SELECT * FROM `Order` " + "WHERE `CustomerID` = " + customer.getId(), "orderattribute");
-	}
+    /**
+     * ORDER RELATED METHODS
+     */
+    public ArrayList getOrders(Customer customer) {
+        return query("SELECT * FROM `Order` " +
+                     "WHERE `CustomerID` = " + customer.getId(),
+                     "orderattribute");
+    }
 
-	public ArrayList getOrders() {
-		return query("SELECT * FROM `Order` ", "orderattribute");
-	}
+    public ArrayList getOrders() {
+        return query("SELECT * FROM `Order` ",
+                     "orderattribute");
+    }
 
-	public Boolean createOrder(OrderAttribute order) {
-		return update("INSERT INTO `Order` (CustomerID,StageStr) " + "VALUES (" + order.getCustomerID() + ",'"
-				+ order.getStage() + "')");
-	}
+    public Boolean createOrder(OrderAttribute order) {
+        return update("INSERT INTO `Order` (CustomerID,StageStr) " +
+                      "VALUES (" + order.getCustomerID() + ",'" + order.getStage() + "')");
+    }
 
-	public boolean addDishToOrder(OrderAttribute order, Dish dish) {
-		return update(
-				"INSERT INTO contains (OrderID, DishID) " + "VALUES (" + order.getId() + "," + dish.getID() + ")");
-	}
+    public boolean addDishToOrder(OrderAttribute order, Dish dish) {
+        return update("INSERT INTO contains (OrderID, DishID) " +
+                      "VALUES (" + order.getId() + "," + dish.getID()+")");
+    }
 
-	public boolean removeDishFromOrder(OrderAttribute order, Dish dish) {
-		return update("DELETE FROM contains WHERE " + "OrderID = " + order.getId() + " " + "DishID = " + dish.getID());
-	}
+    public boolean removeDishFromOrder(OrderAttribute order, Dish dish) {
+        return update("DELETE FROM contains WHERE " +
+                      "OrderID = " + order.getId() + " " +
+                      "DishID = " + dish.getID());
+    }
 
-	public boolean deleteOrder(OrderAttribute order) {
-		return update("DELETE FROM `Order` WHERE ID = " + order.getId());
-	}
+    public boolean deleteOrder(OrderAttribute order) {
+        return update("DELETE FROM `Order` WHERE ID = " + order.getId());
+    }
 
-	public boolean updateOrder(OrderAttribute order) {
-		return update("UPDATE Dish SET `CustomerID`='" + order.getId() + "' ," + "StageStr = '" + order.getStage()
-				+ "' " + "WHERE `ID`='" + order.getId());
-	}
+    public boolean updateOrder(OrderAttribute order) {
+        return update("UPDATE Dish SET `CustomerID`='" + order.getId() + "' ," +
+                      "StageStr = '" + order.getStage() + "' " +
+                      "WHERE `ID`='" + order.getId());
+    }
 
-	/**
-	 * MATERIAL RELATED METHODS
-	 */
-	public ArrayList getMaterials() {
-		return query("SELECT * FROM Material", "material");
-	}
+    /**
+     * MATERIAL RELATED METHODS
+     */
+    public ArrayList getMaterials() {
+        return query("SELECT * FROM Material",
+                     "material");
+    }
 
 	public ArrayList getMaterials(Food food) {
 		return query("SELECT * FROM Material, needs " + "WHERE needs.FoodID = " + food.getId(), "food");
@@ -344,25 +355,30 @@ public class Database {
 		return query("SELECT * FROM Customer", "customer");
 	}
 
-	public Customer getCustomer(Integer id) {
-		ArrayList<Customer> customers = query("SELECT * FROM `Customer` " + "WHERE `Customer`.ID = " + id, "customer");
-		assert (customers.size() == 1);
-		return customers.get(0);
-	}
+    public Customer getCustomer(Integer id) {
+        ArrayList<Customer> customers = query("SELECT * FROM `Customer` " +
+                                   "WHERE `Customer`.ID = " + id,
+                                   "customer");
+        assert(customers.size() == 1);
+        return customers.get(0);
+    }
 
-	public boolean createCustomer(Customer customer) {
-		return update("INSERT INTO Customer (Name,Tel,Address) " + "VALUES ('" + customer.getName() + "','"
-				+ customer.getTel() + "','" + customer.getAddress() + "')");
-	}
+    public boolean createCustomer(Customer customer) {
+        return update("INSERT INTO Customer (Name,Tel,Address) " +
+                      "VALUES ('" + customer.getName() + "','" + customer.getTel() + "','" + customer.getAddress() + "')");
+    }
 
 	public boolean deleteCustomer(Customer customer) {
 		return update("DELETE FROM Customer " + "WHERE ID = " + customer.getId());
 	}
 
-	public boolean updateCustomer(Customer customer) {
-		return update("UPDATE Customer SET " + "`Name` = '" + customer.getName() + "'," + "`Tel` = " + customer.getTel()
-				+ "," + "Address = '" + customer.getAddress() + "' " + "WHERE ID = " + customer.getId());
-	}
+    public boolean updateCustomer(Customer customer) {
+        return update("UPDATE Customer SET " +
+                      "`Name` = '" + customer.getName() + "'," +
+                      "`Tel` = " + customer.getTel() + "," +
+                      "Address = '" + customer.getAddress() + "' " +
+                      "WHERE ID = " + customer.getId());
+    }
 
 	/**
 	 * STAGE RELATED METHODS

@@ -63,7 +63,7 @@ CREATE TABLE `needs` (
 
 ALTER TABLE `Order` ADD CONSTRAINT `Order_fk0` FOREIGN KEY (`CustomerID`) REFERENCES `Customer`(`ID`) ON DELETE CASCADE ON update cascade;
 
-ALTER TABLE `Order` ADD CONSTRAINT `Order_fk1` FOREIGN KEY (`StageID`) REFERENCES `Stage`(`StageStr`) ON DELETE CASCADE ON update cascade;
+ALTER TABLE `Order` ADD CONSTRAINT `Order_fk1` FOREIGN KEY (`StageStr`) REFERENCES `Stage`(`StageStr`) ON DELETE CASCADE ON update cascade;
 
 ALTER TABLE `Dish` ADD CONSTRAINT `Dish_fk0` FOREIGN KEY (`MenuID`) REFERENCES `Menu`(`ID`) ON DELETE CASCADE ON update cascade;
 

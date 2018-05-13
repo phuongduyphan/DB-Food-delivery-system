@@ -1,3 +1,5 @@
+package database;
+
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -10,6 +12,9 @@ public class Stage {
         StageStr = stageStr;
     }
 
+    public Stage() {
+        StageStr = DEFAULT_STAGE;
+    }
     public static void loadStages() {
         stages = new TreeMap<>();
         ArrayList<String> strings = Database.getInstance().getStages();

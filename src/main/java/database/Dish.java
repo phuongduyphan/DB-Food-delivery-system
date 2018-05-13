@@ -1,9 +1,11 @@
+package database;
 
 public class Dish {
     private Integer ID;
     private Menu menu;
     private Food food;
     private Float price;
+
 
     public Dish(Integer ID, Menu menu, Food food, Float price) {
 

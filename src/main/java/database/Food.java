@@ -1,3 +1,4 @@
+package database;
 
 import java.util.ArrayList;
 
@@ -41,13 +42,4 @@ public class Food {
     public Integer getId() {
         return id;
     }
-    @Override
-    public String toString() {
-    	return this.id +" name: " +   this.name;
-    }
-
-	public void setID(Integer id) {
-		this.id = id;
-		
-	}
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenuControler">
+   <children>
+      <AnchorPane fx:id="banner" prefHeight="108.0" prefWidth="720.0" style="-fx-background-color: #3d4956;" AnchorPane.bottomAnchor="612.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="#e81212" layoutX="190.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THE DELIVERY SYSTEM" textAlignment="CENTER" wrappingWidth="360.6708984375">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Text fill="#e81212" layoutX="503.0" layoutY="701.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database project - IMF team" wrappingWidth="202.6708984375" />
+      <AnchorPane fx:id="exitprogram" layoutX="285.0" layoutY="630.0" onMouseClicked="#exitClick" prefHeight="51.0" prefWidth="150.0" style="-fx-background-color: #3d4956;">
+         <children>
+            <Text fill="#d7c012" layoutX="1.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" textAlignment="CENTER" wrappingWidth="161.0">
+               <font>
+                  <Font name="Bodoni MT" size="47.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+      <Button layoutX="373.0" layoutY="150.0" mnemonicParsing="false" onAction="#FoodManagerButton" prefHeight="210.0" prefWidth="260.0" style="-fx-background-color: #3d4956;" text="Food Manager" textFill="#d7c012">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="78.0" layoutY="150.0" mnemonicParsing="false" onAction="#showMenuButton" prefHeight="210.0" prefWidth="260.0" style="-fx-background-color: #3d4956;" text="Show Menu" textFill="#d7c012">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="78.0" layoutY="388.0" mnemonicParsing="false" onAction="#customerButton" prefHeight="210.0" prefWidth="260.0" style="-fx-background-color: #3d4956;" text="Customer" textFill="#d7c012">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Button layoutX="373.0" layoutY="388.0" mnemonicParsing="false" onAction="#orderButon" prefHeight="210.0" prefWidth="260.0" style="-fx-background-color: #3d4956;" text="Order" textFill="#d7c012">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

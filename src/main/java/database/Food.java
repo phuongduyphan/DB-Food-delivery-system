@@ -42,4 +42,8 @@ public class Food {
     public Integer getId() {
         return id;
     }
+
+	public void setID(int id) {
+		this.id = id;
+	}
 }

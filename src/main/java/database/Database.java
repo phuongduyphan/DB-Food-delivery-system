@@ -10,7 +10,7 @@ public class Database {
 	private static final String server = "localhost"; // Server name
 	private static final int port = 3306; // TCP Port
 	private static final String user = "root";
-	private static final String pass = "root";
+	private static final String pass = "thanhtung1";
 	private static final String database = "food_delivery";
 	private static final String DATABASE_URL = "jdbc:mysql://" + server + ":" + port + "/" + database
 			+ "?autoReconnect=true&useSSL=false";

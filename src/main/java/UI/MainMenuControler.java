@@ -56,10 +56,16 @@ public class MainMenuControler implements Initializable{
 	@FXML
 	private void customerButton(ActionEvent event) {
 		System.out.println("customer click");
+		CustomersView view = new CustomersView();
+		Stage scene = new Stage();
+		view.start(scene);
 	}
 	@FXML
 	private void orderButon(ActionEvent event) {
 		System.out.println("order click");
+		OrdersView view = new OrdersView();
+		Stage scene = new Stage();
+		view.start(scene);
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

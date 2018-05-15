@@ -5,8 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.naming.ldap.ManageReferralControl;
+
 import database.Database;
 import database.Dish;
+import database.Food;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,6 +63,22 @@ public class DishGuiController implements Initializable{
 	
 	@FXML 
 	private void newDish(ActionEvent event) {
+		/*String newDishName = newDishTextField.getText();
+		System.out.println("add " + newDishName + " to database! ");
+		Dish dish = new Dish(dishList.size() + 1, GuiManager.menu, );
+		Database.getInstance().addDishToMenu(GuiManager.menu, dish);*/
+		 try {
+			 	Parent loader = new FXMLLoader().load(getClass().getResource("AddDishGui.fxml"));
+		       
+		        Scene scene = new Scene(loader);
+		        Stage stage = new Stage();
+		        stage.setScene(scene);
+		        
+		        stage.show();
+		    }catch (IOException io){
+		        io.printStackTrace();
+		    }
+		
 		
 	}
 	

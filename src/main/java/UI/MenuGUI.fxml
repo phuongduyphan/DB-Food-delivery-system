@@ -37,9 +37,8 @@
             </Lighting>
          </effect>
       </TextField>
-      <Button fx:id="view" layoutX="509.0" layoutY="114.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="View" textFill="#d7c012" />
-      <Button fx:id="Delete" layoutX="509.0" layoutY="153.0" mnemonicParsing="false" onAction="#deleteMenuButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
-      <Button fx:id="view1" layoutX="305.0" layoutY="114.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="view" layoutX="316.0" layoutY="114.0" mnemonicParsing="false" onAction="#viewButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="View" textFill="#d7c012" />
+      <Button fx:id="Delete" layoutX="503.0" layoutY="114.0" mnemonicParsing="false" onAction="#deleteMenuButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
       <TableView fx:id="tableUser" layoutX="86.0" layoutY="192.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
          <columns>
             <TableColumn fx:id="idCol" onEditCommit="#changeIdMenu" prefWidth="88.0" text="ID" />

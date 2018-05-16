@@ -76,6 +76,7 @@ public class MenuGuiController implements Initializable{
 		Menu menu = tableUser.getSelectionModel().getSelectedItem();
 		tableUser.getItems().remove(menu);
 		Database.getInstance().deleteMenu(menu);	
+		menuList.remove(menu);
 	}
 	
 	@FXML
@@ -99,8 +100,9 @@ public class MenuGuiController implements Initializable{
 	private void newMenu(ActionEvent event) throws SQLException {
 		String newMenuName = newMenuTextField.getText();
 		System.out.println("add " + newMenuName + " to database! ");
-		Menu menu = new Menu(1, newMenuName, true);
-		Database.getInstance().createMenu(menu);		
+		Menu menu = new Menu(null, newMenuName, true);
+		Database.getInstance().createMenu(menu);	
+		loadButton(event);
 		
 	}
 	

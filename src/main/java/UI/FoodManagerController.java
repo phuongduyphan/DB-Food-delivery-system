@@ -76,8 +76,9 @@ public class FoodManagerController implements Initializable{
 	private void newFood(ActionEvent event) throws SQLException {
 		String newFoodName = newfoodTextField.getText();
 		System.out.println("add " + newFoodName + " to database! ");
-		Food food = new Food(listFood.size() + 1, newFoodName);
-		Database.getInstance().createFood(food);		
+		Food food = new Food(1, newFoodName);
+		Database.getInstance().createFood(food);	
+		loadButton(event);
 		
 	}
 	

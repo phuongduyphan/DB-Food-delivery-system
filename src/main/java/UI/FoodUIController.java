@@ -56,12 +56,24 @@ public class FoodUIController implements Initializable{
 	}
 	@FXML 
 	private void addMaterial(ActionEvent event) {
-		String newMaterialName = newMaterialField.getText();
+		/*String newMaterialName = newMaterialField.getText();
 		//System.out.println(Material);
 		System.out.println("add " + newMaterialName + " to database! ");
 		float unitPrice = 0;
 		Material material = new Material(1, newMaterialName, unitPrice);
-		Database.getInstance().createMaterial(material);	
+		Database.getInstance().addMaterialToFood(GuiManager.food, material, 1);*/
+		 try {
+			 	Parent loader = new FXMLLoader().load(getClass().getResource("AddMenuGUI.fxml"));
+		       
+		        Scene scene = new Scene(loader);
+		        Stage stage = new Stage();
+		        stage.setScene(scene);
+		        
+		        stage.show();
+		    }catch (IOException io){
+		        io.printStackTrace();
+		    }
+		
 	}
 	
 	@FXML 

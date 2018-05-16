@@ -46,20 +46,8 @@ public class AddDishController implements Initializable{
 		String newDishName = newDishTextField.getText();
 		float newPrice = Float.parseFloat(newpriceTextField.getText());
 		Food food = tableUser.getSelectionModel().getSelectedItem();
-		Dish dish = new Dish(1, GuiManager.menu, food, newPrice);
+		Dish dish = new Dish(null, GuiManager.menu, food, newPrice);
 		Database.getInstance().addDishToMenu(GuiManager.menu, dish);
-/*		
-		 try {
-			 	Parent loader = new FXMLLoader().load(getClass().getResource("DishGui.fxml"));
-		       
-		        Scene scene = new Scene(loader);
-		        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		        stage.setScene(scene);
-		        
-		        stage.show();
-		    }catch (IOException io){
-		        io.printStackTrace();
-		    */	
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 	}

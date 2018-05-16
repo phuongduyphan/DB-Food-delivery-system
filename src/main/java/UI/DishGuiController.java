@@ -84,7 +84,14 @@ public class DishGuiController implements Initializable{
 	
 	@FXML 
 	private void loadButton(ActionEvent event) {
+		dishList = Database.getInstance().getDishes(GuiManager.menu);
 		
+		ObservableList<Dish> data =FXCollections.observableArrayList(dishList);
+		idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		foodIdCol.setCellValueFactory(new PropertyValueFactory<>("foodID"));
+		menuIdCol.setCellValueFactory(new PropertyValueFactory<>("MenuId"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
+		tableUser.setItems(data);
 	}
 	
 	@FXML

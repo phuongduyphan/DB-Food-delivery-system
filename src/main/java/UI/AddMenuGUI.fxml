@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.AddNewMaterialView">
+   <children>
+      <TextField fx:id="newMenuNameTextField" layoutX="127.0" layoutY="50.0" onAction="#createButton" promptText="Insert Menu Name Here" style="-fx-background-color: #3d4956;">
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TextField>
+      <TextField fx:id="newPriceTextField" layoutX="127.0" layoutY="116.0" onAction="#createButton" promptText="Insert Price Here" style="-fx-background-color: #3d4956;">
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TextField>
+      <Button fx:id="create" layoutX="176.0" layoutY="191.0" mnemonicParsing="false" onAction="#createButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Create" textFill="#d7c012" />
+   </children>
+</AnchorPane>

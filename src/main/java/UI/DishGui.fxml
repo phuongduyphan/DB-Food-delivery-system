@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+ fx:controller="UI.DishGuiController">
+   <children>
+      <AnchorPane prefHeight="103.0" prefWidth="720.0" style="-fx-background-color: #3d4956;">
+         <children>
+            <Text fill="#e41010" layoutX="183.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISH MANAGER" textAlignment="CENTER" wrappingWidth="354.6708984375">
+               <font>
+                  <Font name="Bodoni MT Bold Italic" size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button fx:id="back" layoutX="316.0" layoutY="675.0" mnemonicParsing="false" onAction="#backButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Back" textFill="#d7c012" />
+      <Text fill="#e81212" layoutX="503.0" layoutY="707.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database project - IMF team" wrappingWidth="202.6708984375" />
+      <TableView fx:id="tableUser" layoutX="85.0" layoutY="190.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="88.0" text="ID" />
+            <TableColumn fx:id="menuIdCol" prefWidth="182.0" text="MENU ID" />
+            <TableColumn fx:id="foodIdCol" minWidth="7.0" prefWidth="174.0" text="FOOD ID" />
+            <TableColumn fx:id="priceCol" minWidth="7.0" prefWidth="106.0" text="PRICE" />
+         </columns>
+      </TableView>
+      <Button fx:id="newDish" layoutX="85.0" layoutY="113.0" mnemonicParsing="false" onAction="#newDish" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="New Dish" textFill="#d7c012" />
+      <Button fx:id="Load" layoutX="287.0" layoutY="113.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="Delete" layoutX="503.0" layoutY="113.0" mnemonicParsing="false" onAction="#DeleteButton" prefHeight="31.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.AddDishController">
+   <children>
+      <TableView fx:id="tableUser" layoutX="37.0" layoutY="183.0" prefHeight="405.0" prefWidth="527.0" style="-fx-background-color: #3d4956;">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="114.0" text="ID" />
+            <TableColumn fx:id="nameCol" prefWidth="412.0" text="NAME" />
+         </columns>
+      </TableView>
+      <AnchorPane layoutY="-1.0" prefHeight="110.0" prefWidth="600.0" style="-fx-background-color: #3d4956;">
+         <children>
+            <Text fill="#da1414" layoutX="186.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD DISH" textAlignment="CENTER" wrappingWidth="228.94677734375">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Button fx:id="create" layoutX="256.0" layoutY="615.0" mnemonicParsing="false" onAction="#createButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Create" textFill="#d7c012" />
+      <TextField fx:id="newDishTextField" layoutX="37.0" layoutY="133.0" onAction="#createButton" promptText="Insert New Dish Here" style="-fx-background-color: #3d4956;">
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TextField>
+      <TextField fx:id="newpriceTextField" layoutX="366.0" layoutY="133.0" onAction="#createButton" promptText="Insert Price Here" style="-fx-background-color: #3d4956;">
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TextField>
+   </children>
+</AnchorPane>

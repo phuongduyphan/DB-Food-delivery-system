@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.FoodUIController">
+   <children>
+      <AnchorPane prefHeight="103.0" prefWidth="720.0" style="-fx-background-color: #3d4956;">
+         <children>
+            <Text fill="#e41010" layoutX="183.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MATERIAL " textAlignment="CENTER" wrappingWidth="354.6708984375">
+               <font>
+                  <Font name="Bodoni MT Bold Italic" size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tableUser" layoutX="78.0" layoutY="196.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="161.0" text="ID" />
+            <TableColumn fx:id="nameCol" prefWidth="216.0" text="NAME" />
+            <TableColumn fx:id="priceCol" prefWidth="174.0" text="PRICE" />
+            <TableColumn fx:id="nameCol2" prefWidth="258.0" text="NAME" />
+         </columns>
+      </TableView>
+      <Button fx:id="back" layoutX="316.0" layoutY="683.0" mnemonicParsing="false" onAction="#backButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Back" textFill="#d7c012" />
+      <Text fill="#e81212" layoutX="513.0" layoutY="704.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database project - IMF team" wrappingWidth="202.6708984375" />
+      <Button fx:id="add" layoutX="85.0" layoutY="112.0" mnemonicParsing="false" onAction="#addMaterial" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Add Material" textFill="#d7c012" />
+      <Button fx:id="load" layoutX="293.0" layoutY="112.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="delete" layoutX="457.0" layoutY="112.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
+   </children>
+</AnchorPane>

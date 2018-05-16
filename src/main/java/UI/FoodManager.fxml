@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+ fx:controller="UI.FoodManagerController">
+   <children>
+      <AnchorPane prefHeight="103.0" prefWidth="720.0" style="-fx-background-color: #3d4956;">
+         <children>
+            <Text fill="#e41010" layoutX="183.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOOD MANAGER" textAlignment="CENTER" wrappingWidth="354.6708984375">
+               <font>
+                  <Font name="Bodoni MT Bold Italic" size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Text fill="#e81212" layoutX="517.0" layoutY="712.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database project - IMF team" wrappingWidth="202.6708984375" />
+      <Button fx:id="back" layoutX="327.0" layoutY="681.0" mnemonicParsing="false" onAction="#backButton" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #3d4956;" text="Back" textFill="#d7c012" />
+      <TableView fx:id="tableUser" layoutX="85.0" layoutY="204.0" prefHeight="477.0" prefWidth="551.0" style="-fx-background-color: #3d4956;">
+        <columns>
+          <TableColumn fx:id="idCol" onEditCommit="#changeIdFood" prefWidth="161.0" text="ID" />
+          <TableColumn fx:id="nameCol" onEditCommit="#changeFoodName" prefWidth="389.0" text="NAME" />
+        </columns>
+      </TableView>
+      <Button fx:id="load" layoutX="372.0" layoutY="111.0" mnemonicParsing="false" onAction="#loadButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Load" textFill="#d7c012" />
+      <Button fx:id="newFood" layoutX="87.0" layoutY="111.0" mnemonicParsing="false" onAction="#newFood" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="New Food" textFill="#d7c012" />
+      <TextField fx:id="newfoodTextField" layoutX="85.0" layoutY="163.0" onAction="#newFood" promptText="Insert New Food Here" style="-fx-background-color: #3d4956;">
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TextField>
+      <Button fx:id="Delete" layoutX="242.0" layoutY="111.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="Delete" textFill="#d7c012" />
+      <Button fx:id="viewFood" layoutX="506.0" layoutY="111.0" mnemonicParsing="true" onAction="#viewFoodButton" prefHeight="44.0" prefWidth="112.0" style="-fx-background-color: #3d4956;" text="View" textFill="#d7c012" />
+   </children>
+</AnchorPane>

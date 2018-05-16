@@ -2,6 +2,8 @@ package UI;
 
 import java.util.ArrayList;
 
+import database.Database;
+
 public class OrderAttribute
 	{
 		private Integer id;

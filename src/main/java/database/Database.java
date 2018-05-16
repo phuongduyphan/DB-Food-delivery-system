@@ -10,7 +10,7 @@ public class Database {
 	private static final String server = "localhost"; // Server name
 	private static final int port = 3306; // TCP Port
 	private static final String user = "root";
-	private static final String pass = "thanhtung1";
+	private static final String pass = "17041998";
 	private static final String database = "food_delivery";
 	private static final String DATABASE_URL = "jdbc:mysql://" + server + ":" + port + "/" + database
 			+ "?autoReconnect=true&useSSL=false";
@@ -310,9 +310,9 @@ public class Database {
     }
 
     public boolean updateOrder(OrderAttribute order) {
-        return update("UPDATE Dish SET `CustomerID`='" + order.getId() + "' ," +
+        return update("UPDATE `Order` SET CustomerID= " + order.getCustomerID() + " ," +
                       "StageStr = '" + order.getStage() + "' " +
-                      "WHERE `ID`='" + order.getId());
+                      "WHERE `ID`=" + order.getId());
     }
 
     /**

@@ -310,9 +310,9 @@ public class Database {
     }
 
     public boolean updateOrder(OrderAttribute order) {
-        return update("UPDATE `Order` SET CustomerID= " + order.getCustomerID() + " ," +
+        return update("UPDATE Dish SET `CustomerID`='" + order.getId() + "' ," +
                       "StageStr = '" + order.getStage() + "' " +
-                      "WHERE `ID`=" + order.getId());
+                      "WHERE `ID`='" + order.getId());
     }
 
     /**
@@ -324,7 +324,8 @@ public class Database {
     }
 
 	public ArrayList getMaterials(Food food) {
-		return query("SELECT * FROM Material, needs " + "WHERE needs.FoodID = " + food.getId(), "food");
+		return query("SELECT * FROM Material, needs, food " + "WHERE needs.FoodID = '" + food.getId() + "'" +
+				 " and needs.foodid = food.id", "material");
 	}
 
 	// "INSERT INTO `food_delivery`.`menu` (`MenuStr`) VALUES ('" + menu.getName() +

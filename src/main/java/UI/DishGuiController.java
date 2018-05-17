@@ -112,7 +112,7 @@ public class DishGuiController implements Initializable{
 		
 		ObservableList<Dish> data =FXCollections.observableArrayList(dishList);
 		idCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
-		foodIdCol.setCellValueFactory(new PropertyValueFactory<>("foodID"));
+		foodIdCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 		menuIdCol.setCellValueFactory(new PropertyValueFactory<>("MenuId"));
 		
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));

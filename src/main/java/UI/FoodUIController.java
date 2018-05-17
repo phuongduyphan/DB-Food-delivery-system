@@ -78,6 +78,7 @@ public class FoodUIController implements Initializable{
 	
 	@FXML 
 	private void loadButton(ActionEvent event) {
+		
 		listMaterial = Database.getInstance().getMaterials(GuiManager.food);
 		
 		ObservableList<Material> data =FXCollections.observableArrayList(listMaterial);
@@ -86,6 +87,7 @@ public class FoodUIController implements Initializable{
 		priceCol.setCellValueFactory(new PropertyValueFactory<>("UnitPrice"));
 		tableUser.setItems(null);
 		tableUser.setItems(data);
+		
 	}
 	
 	

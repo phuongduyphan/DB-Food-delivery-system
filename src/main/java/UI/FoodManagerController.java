@@ -86,6 +86,7 @@ public class FoodManagerController implements Initializable{
 	private void viewFoodButton(ActionEvent event) {
 		Food food = tableUser.getSelectionModel().getSelectedItem();
 		GuiManager.food = food;
+		System.out.println(GuiManager.food.getId());
 		
 		System.out.println("clicked");
 		 try {

@@ -43,6 +43,10 @@ public class Dish {
     public Food getFood() {
         return food;
     }
+    
+    public String getName() {
+        return food.getName();
+    }
 
     public void setFood(Food food) {
         this.food = food;
